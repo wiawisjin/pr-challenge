@@ -38,14 +38,11 @@ a{text-decoration:none;color:inherit;}
 }
 @keyframes glow{0%{opacity:.6}100%{opacity:1;transform:scale(1.03)}}
 .hero>*{position:relative;}
-
-/* [1] 로고 이미지 */
 .hero-logo{
   height:40px;margin-bottom:24px;
   filter:brightness(0) invert(1);
   animation:fu .7s ease-out;
 }
-
 .hero h1{
   font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,10vw,90px);
   letter-spacing:4px;line-height:1.05;color:#fff;animation:fu .7s ease-out .1s both;
@@ -111,7 +108,25 @@ a{text-decoration:none;color:inherit;}
   opacity:.8;
 }
 
-/* [3] 후기 없을 때 CTA 스타일 */
+/* 더보기 버튼 */
+.more-wrap{text-align:center;margin-top:28px;}
+.more-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 32px;background:transparent;
+  border:1px solid rgba(0,195,255,.3);border-radius:8px;
+  color:var(--ac);font-size:14px;font-weight:600;
+  font-family:'Noto Sans KR',sans-serif;cursor:pointer;
+  transition:all .25s;
+}
+.more-btn:hover{
+  background:rgba(0,195,255,.08);border-color:var(--ac);
+  transform:translateY(-2px);
+}
+.more-count{font-weight:400;opacity:.7;font-size:12px;}
+.rev-card-new{animation:cardIn .4s ease-out both;}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* 후기 없을 때 */
 .reviews-cta{
   text-align:center;padding:60px 20px;
   border:2px dashed rgba(0,195,255,.15);border-radius:16px;
@@ -139,7 +154,6 @@ a{text-decoration:none;color:inherit;}
   width:40px;height:40px;display:flex;align-items:center;justify-content:center;
   border-radius:10px;background:rgba(0,195,255,.1);font-size:18px;margin-bottom:12px;
 }
-/* [8] 카드 텍스트 크기 키움 */
 .ic-t{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
 .ic-d{font-size:14px;color:var(--lt);line-height:1.8;}
 
@@ -157,7 +171,7 @@ a{text-decoration:none;color:inherit;}
 .step-txt{font-size:13px;font-weight:500;color:var(--wh);line-height:1.5;}
 .step-arr{flex:0 0 auto;color:var(--mid);font-size:18px;margin-top:10px;}
 
-/* ── PRIZES [5] 반짝이 효과 + 이미지 ── */
+/* ── PRIZES ── */
 .prizes{margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
 .prize{
   position:relative;background:var(--dk);
@@ -170,33 +184,23 @@ a{text-decoration:none;color:inherit;}
 .pr-all::before{background:linear-gradient(90deg,var(--ac),var(--ac2));}
 .pr-set::before{background:linear-gradient(90deg,#ff6b6b,var(--red));}
 .pr-best::before{background:linear-gradient(90deg,#f0c040,var(--gold),#f0c040);}
-
-/* 반짝이 shimmer */
 .prize::after{
   content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.06) 50%,transparent 70%);
   transition:none;z-index:1;
 }
 .prize:hover::after{left:150%;transition:left .8s ease;}
-
 .pr-best{border-color:rgba(212,168,67,.25);}
 .pr-best:hover{box-shadow:0 8px 32px rgba(212,168,67,.2);}
 .pr-set:hover{box-shadow:0 8px 32px rgba(255,59,74,.15);}
 .pr-all:hover{box-shadow:0 8px 32px rgba(0,195,255,.15);}
-
-/* 상품 이미지 영역 */
 .pr-img-wrap{
   width:100%;aspect-ratio:16/10;
   background:linear-gradient(135deg,rgba(255,255,255,.02),rgba(255,255,255,.05));
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
 }
-.pr-img-wrap img{
-  width:100%;height:100%;object-fit:contain;
-  padding:16px;
-}
+.pr-img-wrap img{width:100%;height:100%;object-fit:contain;padding:16px;}
 .pr-img-placeholder{font-size:48px;opacity:.3;}
-
 .pr-body{padding:18px 20px 22px;position:relative;z-index:2;}
 .pr-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
 .pr-all .pr-label{color:var(--ac);}
@@ -228,8 +232,12 @@ a{text-decoration:none;color:inherit;}
 @media(max-width:640px){
   .sec{padding:50px 16px;}
   .rev-grid{grid-template-columns:1fr;gap:12px;}
-  .steps{flex-direction:column;align-items:center;}
-  .step-arr{transform:rotate(90deg);margin:0;}
+  /* [2] 모바일 참여절차: 2x2 그리드로 압축 */
+  .steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center;}
+  .step{flex:none;width:100%;}
+  .step-arr{display:none;}
+  .step-n{width:36px;height:36px;font-size:14px;margin-bottom:6px;}
+  .step-txt{font-size:12px;}
   .info-grid,.prizes{grid-template-columns:1fr;}
 }
 </style>
@@ -238,7 +246,6 @@ a{text-decoration:none;color:inherit;}
 
 <!-- ══ HERO ══ -->
 <section class="hero">
-  <!-- [1] 로고 이미지 -->
   <img class="hero-logo" src="https://wiawis.com/upload/editor/202512344152326xiqlB4h2ov.png" alt="WIAWIS">
   <h1>PERFORMANCE<br><span>CHALLENGE</span></h1>
   <p class="hero-sub">WIAWIS를 타면 더 빨라집니다 — 당신의 기록이 증명합니다</p>
@@ -251,7 +258,6 @@ a{text-decoration:none;color:inherit;}
 <!-- ══ REVIEWS ══ -->
 <section class="sec" id="reviews">
   <div class="sec-head">
-    <!-- [2] 섹션 라벨 변경 -->
     <p class="sec-label">PR RECORDS</p>
     <h2 class="sec-title">기록을 깬 라이더들</h2>
   </div>
@@ -298,16 +304,13 @@ a{text-decoration:none;color:inherit;}
       <div class="step-arr">→</div>
       <div class="step"><div class="step-n">3</div><div class="step-txt">아래 폼에서<br>후기 URL 접수</div></div>
       <div class="step-arr">→</div>
-      <!-- [4] 이벤트 종료 후 발송 -->
       <div class="step"><div class="step-n">4</div><div class="step-txt">이벤트 종료 후<br>증정상품 발송 🎁</div></div>
     </div>
   </div>
 
-  <!-- [5] 상품 카드 — 이미지 + 반짝이 -->
   <div class="prizes">
     <div class="prize pr-all">
       <div class="pr-img-wrap">
-        <!-- ▼ 물통 이미지 URL 넣기 ▼ -->
         <img src="https://wiawis.com/upload/custom/20250107161014IbxvbMG0Tt.png" alt="WIAWIS 물통" onerror="this.outerHTML='<div class=pr-img-placeholder>🍶</div>'">
       </div>
       <div class="pr-body">
@@ -317,8 +320,7 @@ a{text-decoration:none;color:inherit;}
     </div>
     <div class="prize pr-set">
       <div class="pr-img-wrap">
-        <!-- ▼ 셋트 이미지 URL 넣기 ▼ -->
-        <img src="https://wiawis.com/upload/editor/202605148114104Utz3QfRhbb.png" alt="WIAWIS 셋트" onerror="this.outerHTML='<div class=pr-img-placeholder>🎒</div>'">
+        <img src="https://wiawis.com/upload/editor/202605148171147HvOxr98ZlG.png" alt="WIAWIS 셋트" onerror="this.outerHTML='<div class=pr-img-placeholder>🎒</div>'">
       </div>
       <div class="pr-body">
         <div class="pr-label">우수후기 10명</div>
@@ -328,7 +330,6 @@ a{text-decoration:none;color:inherit;}
     </div>
     <div class="prize pr-best">
       <div class="pr-img-wrap">
-        <!-- ▼ 휠셋 이미지 URL 넣기 ▼ -->
         <img src="https://wiawis.com/upload/thumbnail/202602441459126hS6QnhkmU.png" alt="CARRMATO CXT-R50 WAVY" onerror="this.outerHTML='<div class=pr-img-placeholder>🏆</div>'">
       </div>
       <div class="pr-body">
@@ -357,13 +358,11 @@ a{text-decoration:none;color:inherit;}
     <h2 class="sec-title">후기 접수 신청</h2>
   </div>
   <div class="form-wrap">
-    <!-- ▼ 구글 폼 URL 교체 ▼ -->
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfPyPbubG-ng6jgkFNCrL3plWWJoLAQhZBf7EMxUP8wbC4y_w/viewform?embedded=true"
       frameborder="0" marginheight="0" marginwidth="0" loading="lazy">로딩 중…</iframe>
   </div>
 </section>
 
-<!-- [7] 문의 이메일 변경 -->
 <footer class="footer">
   <p>© 2026 WIAWIS by Win&Win Co., Ltd.</p>
   <p style="margin-top:4px;">문의: <a href="mailto:ysjin@wiawis.com">ysjin@wiawis.com</a></p>
@@ -385,8 +384,8 @@ function esc(s){const d=document.createElement('div');d.textContent=s||'';return
 
 function render(reviews){
   const c=document.getElementById('reviewsContainer');
+  const INITIAL = 6;
 
-  /* [3] 후기 없을 때 CTA */
   if(!reviews||!reviews.length){
     c.innerHTML=`
       <div class="reviews-cta">
@@ -402,16 +401,14 @@ function render(reviews){
   }
 
   const s=shuffle(reviews);
-  let html='<div class="rev-grid">';
-  s.forEach(r=>{
+
+  function card(r){
     const p=P[r.platform]||P['커뮤니티'];
     const thumbInner = r.thumbnail
       ? `<img src="${esc(r.thumbnail)}" alt="후기" loading="lazy" onerror="this.classList.add('err')">${p.icon}`
       : p.icon;
-    const titleLine = r.ogTitle
-      ? `<div class="rev-og-title">${esc(r.ogTitle)}</div>`
-      : '';
-    html+=`<a class="rev-card" href="${esc(r.url||'#')}" target="_blank" rel="noopener">
+    const titleLine = r.ogTitle ? `<div class="rev-og-title">${esc(r.ogTitle)}</div>` : '';
+    return `<a class="rev-card" href="${esc(r.url||'#')}" target="_blank" rel="noopener">
       <div class="rev-thumb ${p.tcls}">${thumbInner}</div>
       <div class="rev-body">
         <div class="rev-plat ${p.cls}">${p.icon} ${p.label}</div>
@@ -420,23 +417,37 @@ function render(reviews){
         <div class="rev-comment">${esc(r.comment)}</div>
         ${r.model?`<div class="rev-model">모델: <b>${esc(r.model)}</b></div>`:''}
       </div></a>`;
-  });
+  }
+
+  let html='<div class="rev-grid">';
+  s.slice(0,INITIAL).forEach(r=>{ html+=card(r); });
   html+='</div>';
+
+  if(s.length>INITIAL){
+    html+=`<div class="more-wrap"><button class="more-btn" id="moreBtn">후기 더보기 <span class="more-count">(+${s.length-INITIAL})</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button></div>`;
+  }
+
   c.innerHTML=html;
+
+  if(s.length>INITIAL){
+    document.getElementById('moreBtn').addEventListener('click',function(){
+      const grid=c.querySelector('.rev-grid');
+      s.slice(INITIAL).forEach((r,i)=>{
+        const tmp=document.createElement('div');
+        tmp.innerHTML=card(r);
+        const el=tmp.firstElementChild;
+        el.classList.add('rev-card-new');
+        el.style.animationDelay=(i*0.06)+'s';
+        grid.appendChild(el);
+      });
+      this.parentElement.remove();
+    });
+  }
 }
 
 async function load(){
-  if(!SCRIPT_URL){
-    render([
-      {nickname:'김*준', platform:'인스타그램', comment:'불광동 힐클라임 PR 42초 단축! 프레임 강성이 확실히 다릅니다.', model:'HEXION-PRO XP', url:'#', thumbnail:'https://picsum.photos/seed/wiawis1/600/375', ogTitle:'스트라바 PR 갱신 🔥 HEXION PRO XP 힐클라임 인증'},
-      {nickname:'이*현', platform:'블로그', comment:'양재천 구간 PR 달성, 평속 2km/h 올랐습니다.', model:'RADICAL 2', url:'#', thumbnail:'https://picsum.photos/seed/wiawis2/600/375', ogTitle:'WIAWIS 라디칼2 스트라바 PR 갱신 후기'},
-      {nickname:'박*영', platform:'유튜브', comment:'팔당댐 구간 PR 1분 12초 단축, 영상으로 증명합니다.', model:'WAWS Pro XP 2', url:'#', thumbnail:'https://picsum.photos/seed/wiawis3/600/375', ogTitle:'[PR 갱신] WIAWIS로 바꾸고 기록이 바뀌었다'},
-      {nickname:'최*호', platform:'커뮤니티', comment:'동네 뒷산 세그먼트 PR 깼습니다. 가벼운 게 정의입니다.', model:'HEXION', url:'#', thumbnail:'', ogTitle:''},
-      {nickname:'정*아', platform:'카페', comment:'제주 중문 업힐 PR! 여성 라이더도 확실히 차이를 느낍니다.', model:'RADICAL 2', url:'#', thumbnail:'https://picsum.photos/seed/wiawis5/600/375', ogTitle:'제주 업힐 PR 갱신! 라디칼2 여성 라이더 후기'},
-      {nickname:'한*수', platform:'인스타그램', comment:'북악 스카이웨이 PR 28초 갱신, 스프린트 반응이 미쳤습니다.', model:'HEXION-PRO XP', url:'#', thumbnail:'https://picsum.photos/seed/wiawis6/600/375', ogTitle:'북악 PR 갱신 🏔️ HEXION PRO XP 인증'},
-    ]);
-    return;
-  }
   try{
     const res=await fetch(SCRIPT_URL);
     const data=await res.json();
